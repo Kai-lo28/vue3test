@@ -40,6 +40,26 @@ import TheWelcome from './components/TheWelcome.vue'
 
   //Form Bindings
   const text = ref('')
+
+  //List Rendering
+  // give each todo a unique id
+  let id = 0
+  
+  const newTodo = ref('')
+  const todos = ref([
+    { id: id++, text: 'Learn HTML' },
+    { id: id++, text: 'Learn JavaScript' },
+    { id: id++, text: 'Learn Vue' }
+  ])
+  
+  function addTodo() {
+    todos.value.push({ id: id++, text: newTodo.value})
+    newTodo.value = ''
+  }
+  
+  function removeTodo(todo) {
+    todos.value = todos.value.filter((v) => v.id !== todo.id)
+  }
 </script>
 
 <template>
@@ -53,6 +73,19 @@ import TheWelcome from './components/TheWelcome.vue'
   <h1>Form Bindings</h1>
   <input v-model="text" placeholder="Type here">
   <p>{{ text }}</p>
+  <br><hr>
+  <!--List Rendering-->
+  <h1>List Rendering</h1>
+  <form @submit.prevent="addTodo">
+    <input v-model="newTodo">
+    <button>Add Todo</button>    
+  </form>
+  <ul>
+    <li v-for="todo in todos" :key="todo.id">
+      {{ todo.text }}
+      <button @click="removeTodo(todo)">X</button>
+    </li>
+  </ul>
   <!--
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
