@@ -33,19 +33,26 @@ import TheWelcome from './components/TheWelcome.vue'
   console.log(state.count) // 2
   // 原始 ref 现在已经和 state.count 失去联系
   console.log(count.value) // 1
-
-    console.log(otherCount.value) // 2
+  
+  console.log(otherCount.value) // 2
   otherCount.value = 9
   console.log(state.count) // 9
+
+  //Form Bindings
+  const text = ref('')
 </script>
 
 <template>
   <h1>{{ message }}</h1>
   <p>count is: {{ counter.count }}</p>
   <h1>{{ message.split('').reverse().join('') }}</h1>
-  <button @click="counter.count++">
-count
-</button>
+  <button @click="counter.count++">count</button>
+  
+  <br><hr>
+  <!--Form Bindings-->
+  <h1>Form Bindings</h1>
+  <input v-model="text" placeholder="Type here">
+  <p>{{ text }}</p>
   <!--
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
